@@ -15,7 +15,14 @@ export class EditEmployeeComponent implements OnInit {
   constructor (private router: Router, private route: ActivatedRoute, private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id')
+    if (!id) {
+      alert('No Id provided')
+    }
 
+    this.employeeService.getEmployee(id!).subscribe(employee => {
+      this.employee.next(employee)
+    })
   }
 
   editEmployee(employee: Employee) {

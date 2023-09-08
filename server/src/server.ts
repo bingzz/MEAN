@@ -10,7 +10,7 @@ dotenv.config()
 const { ATLAS_URI } = process.env
 
 if (!ATLAS_URI) {
-  console.error('No Atlas URI environment variable has been defined in the config.env')
+  console.error('No Atlas URI environment variable has been defined in the .env')
   process.exit(1)
 }
 
@@ -21,8 +21,8 @@ connectToDatabase(ATLAS_URI)
     app.use(cors())
 
     app.use('/employees', employeeRouter)
-    
+
     app.listen(port, () => {
       console.log(`Server is currently runniing at:`, port)
     })
-  })
+  }).catch(error => console.error(error))
